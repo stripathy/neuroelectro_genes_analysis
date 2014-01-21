@@ -1,5 +1,5 @@
 
-fName = 'data/brain_region_info.csv';
+fName = 'data/brain_region_info.xlsx';
 fid = fopen(fName,'r');  % Open text file
 
 [ndata, text_data, alldata] = xlsread(fName);
@@ -21,15 +21,15 @@ for i = 2:size(alldata,1)
             regionStruct{i-1}.acronym = alldata{i,j};
         elseif j == 3
             regionStruct{i-1}.name = alldata{i,j};
-        elseif j == 4
+        elseif j == 3
             regionStruct{i-1}.treedepth = alldata{i,j};
-        elseif j == 5
+        elseif j == 4
             regionStruct{i-1}.color = alldata{i,j};
         end
     end
 end
 
-fName = 'data/image_series_info.csv';
+fName = 'data/image_series_info.xlsx';
 fid = fopen(fName,'r');  % Open text file
 
 [ndata, text_data, alldata] = xlsread(fName);
@@ -78,12 +78,12 @@ for i = 1:length(regionStruct)
 end
 
 
-fName = 'data/neuron_region_assignment_modified.csv';
+fName = 'data/neuron_region_assignment_modified_new.xlsx';
 fid = fopen(fName,'r');  % Open text file
 
 [ndata, text_data, alldata] = xlsread(fName);
 
-clear text 
+clear text regionId
 headers = alldata(1,:);
 neuronStruct = {};
 for i = 2:size(alldata,1)

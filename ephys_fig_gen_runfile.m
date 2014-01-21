@@ -451,8 +451,8 @@ end
 
 % only use neurons where no more than 2 (of the 6 ephys params missing and
 % at least 3 articles)
-maxNonZeros = 2; % how many ephys params missing?
-neuronMinCount = 3; % how many articles defining neuron type?
+maxNonZeros = 6; % how many ephys params missing?
+neuronMinCount = 0; % how many articles defining neuron type?
 
 
 %runs ppca algorithm
@@ -624,6 +624,12 @@ load('data/non_exp_allen_genes');
 go_gene_map_full(0) = keys(gene_ise_index_map);
 go_gene_map_full(-1) = nonExpGenes;
 
+z = {};
+for i = 1:length(nonExpGenes)
+    z{i} = char(nonExpGenes{i});
+end
+go_gene_map_full(-2) = setdiff(keys(gene_ise_index_map), z);
+
 goStruct = GO.terms;
 go_id_term_map = containers.Map('KeyType', 'double', 'ValueType','any');
 for i = 1:length(goStruct)
@@ -631,6 +637,7 @@ for i = 1:length(goStruct)
 end
 go_id_term_map(0) = 'all genes';
 go_id_term_map(-1) = 'nonexpressed genes';
+go_id_term_map(-2) = 'all genes minus nonexp';
 
 % maps neuron names to neuron regions
 validNeuronInds = [];

@@ -1,7 +1,7 @@
 % loads in neuroelectro data from spreadsheets and puts into variables and
 % format
 
-fName = 'data/article_ephys_metadata_summary_10_24_13.csv';
+fName = 'data/article_ephys_metadata_summary_10_24_13.xlsx';
 fid = fopen(fName,'r');  % Open text file
 
 [ndata, text, alldata] = xlsread(fName);
